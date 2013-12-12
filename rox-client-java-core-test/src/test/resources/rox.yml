@@ -1,0 +1,5 @@
+project:
+  version: ${project.version}
+  apiId: b3da58023e6c
+
+server: localhost
