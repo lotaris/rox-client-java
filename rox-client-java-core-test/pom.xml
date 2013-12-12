@@ -13,7 +13,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<lotaris.maven.rox.junit.version>2.0.0</lotaris.maven.rox.junit.version>
+		<lotaris.maven.rox.junit.version>2.0.2</lotaris.maven.rox.junit.version>
 		<lotaris.rox.client.junit.version>2.0.0-SNAPSHOT</lotaris.rox.client.junit.version>
 	</properties>
 	
@@ -57,7 +57,7 @@
 						<id>roxJunit</id>
 						<phase>test</phase>
 						<goals>
-							<goal>rox-junit</goal>
+							<goal>junit</goal>
 						</goals>
 						<configuration>
 							<fullStackTraces>true</fullStackTraces>
