@@ -16,7 +16,8 @@ public class ServerConfiguration {
 	private String apiKeyId;
 	private String apiKeySecret;
 	private String projectApiId;
-
+	private ProxyConfiguration proxyConfiguration;
+	
 	public ServerConfiguration(String name) {
 		this.name = name;
 	}
@@ -26,6 +27,16 @@ public class ServerConfiguration {
 		this.apiKeyId = configureString(apiKeyId, data, "apiKeyId");
 		this.apiKeySecret = configureString(apiKeySecret, data, "apiKeySecret");
 		this.projectApiId = configureString(projectApiId, data, "projectApiId");
+
+		if (data.containsKey("proxy")) {
+			this.proxyConfiguration = new ProxyConfiguration();
+			if (data.get("proxy") instanceof Map) {
+				this.proxyConfiguration.configureWith((Map) data.get("proxy"));
+			}
+			else {
+				throw new RoxConfigurationException("Unable to parse the proxy configuration for server: " + name);
+			}
+		}
 	}
 
 	public void configureAuthentication(URLConnection connection) {
@@ -60,6 +71,14 @@ public class ServerConfiguration {
 		return projectApiId;
 	}
 
+	public boolean hasProxyConfiguration() {
+		return proxyConfiguration != null;
+	}
+	
+	public ProxyConfiguration getProxyConfiguration() {
+		return proxyConfiguration;
+	}
+
 	private String configureString(String previousValue, Map<String, Object> data, String key) {
 		final Object value = data.get(key);
 		return value != null ? value.toString() : previousValue;
@@ -76,6 +95,10 @@ public class ServerConfiguration {
 			builder.append(", apiKeySecret: \"").append(apiKeySecret.replaceAll("[.]", "*")).append("\"");
 		}
 		builder.append(", projectApiId: \"").append(projectApiId).append("\"");
+		
+		if (proxyConfiguration != null) {
+			builder.append(", proxy: \"").append(proxyConfiguration).append("\"");
+		}
 
 		return builder.toString();
 	}

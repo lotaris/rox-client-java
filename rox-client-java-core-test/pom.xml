@@ -6,7 +6,7 @@
 
 	<groupId>com.lotaris.rox.client</groupId>
 	<artifactId>rox-client-java-core-test</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	
 	<name>Lotaris ROX Client Core Test (Java)</name>
 
@@ -14,7 +14,7 @@
 
 	<properties>
 		<lotaris.maven.rox.junit.version>2.0.2</lotaris.maven.rox.junit.version>
-		<lotaris.rox.client.junit.version>2.0.0-SNAPSHOT</lotaris.rox.client.junit.version>
+		<lotaris.rox.client.junit.version>2.0.0</lotaris.rox.client.junit.version>
 	</properties>
 	
 	<build>
