@@ -3,6 +3,7 @@ package com.lotaris.rox.core.connector;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lotaris.rox.common.config.Configuration;
+import com.lotaris.rox.common.config.ServerConfiguration;
 import com.lotaris.rox.common.model.RoxPayload;
 import com.lotaris.rox.common.utils.Constants;
 import com.lotaris.rox.commons.optimize.OptimizerStore;
@@ -17,10 +18,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +112,7 @@ public class Connector {
 		}
 
 		try {
-			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			final HttpURLConnection conn = openConnection(configuration.getServerConfiguration(), url);
 
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", API_ROOT_MEDIA_TYPE + "; charset=" + Constants.ENCODING);
@@ -210,7 +212,7 @@ public class Connector {
 
 	private HttpURLConnection uploadPayload(final URL payloadResourceUrl, final RoxPayload payload) throws IOException {
 
-		final HttpURLConnection conn = (HttpURLConnection) payloadResourceUrl.openConnection();
+		final HttpURLConnection conn = openConnection(configuration.getServerConfiguration(), payloadResourceUrl);
 
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", API_TEST_PAYLOAD_MEDIA_TYPE + "; charset=" + Constants.ENCODING);
@@ -286,6 +288,24 @@ public class Connector {
 	private void optimizeStop(boolean persist) {
 		if (store != null) {
 			store.stop(persist);
+		}
+	}
+	
+	/**
+	 * Open a connection regarding the configuration and the URL
+	 * 
+	 * @param configuration The configuration to get the proxy information if necessary
+	 * @param url The URL to open the connection from
+	 * @return The opened connection
+	 * @throws IOException In case of error when opening the connection
+	 */
+	private HttpURLConnection openConnection(ServerConfiguration configuration, URL url) throws IOException {
+		if (configuration.hasProxyConfiguration()) {
+			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(configuration.getProxyConfiguration().getHost(), configuration.getProxyConfiguration().getPort()));
+			return (HttpURLConnection) url.openConnection(proxy);
+		}
+		else {
+			return (HttpURLConnection) url.openConnection();
 		}
 	}
 }
