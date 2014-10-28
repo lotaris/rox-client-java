@@ -19,7 +19,7 @@ mvn clean install
 <dependency>
   <groupId>com.lotaris.rox.client</groupId>
   <artifactId>rox-client-java-core</artifactId>
-  <version>2.2.0-SNAPSHOT</version>
+  <version>2.2.0</version>
 </dependenc>
 ```
 
