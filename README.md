@@ -1,6 +1,6 @@
 # rox-client-java
 
-> Utilities for [ROX Center](https://github.com/lotaris/rox-center) clients written in Java.
+> Base Java client for [ROX Center](https://github.com/lotaris/rox-center) for Java based clients.
 
 ## Usage
 
