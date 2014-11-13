@@ -9,7 +9,7 @@
 	<version>2.2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Lotaris ROX Client Core (Java)</name>
+	<name>ROX Client Java</name>
 	<description>Base code to write ROX Center clients in Java</description>
 
 	<licenses>
