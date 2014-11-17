@@ -4,22 +4,13 @@
 
 ## Usage
 
-1. Clone the repository.
-
-2. Run the following command
-
-```bash
-cd <projectFolder>/rox-client-java-core
-mvn clean install
-```
-
-3. Put the following dependency in your pom.xml
+1. Put the following dependency in your pom.xml
 
 ```xml
 <dependency>
   <groupId>com.lotaris.rox.client</groupId>
-  <artifactId>rox-client-java-core</artifactId>
-  <version>2.2.0</version>
+  <artifactId>rox-client-java</artifactId>
+  <version>2.2.1</version>
 </dependenc>
 ```
 
