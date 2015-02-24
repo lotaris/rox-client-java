@@ -54,14 +54,15 @@ public class FilterUtils {
 	 * Define if a test is runnable based on its description data
 	 * 
 	 * @param name Test name
+	 * @param technicalName Technical name
 	 * @param key ROX key
 	 * @param tags The tags
 	 * @param tickets The tickets
 	 * @param filters The filters
 	 * @return True if the test can be run
 	 */
-	public static boolean isRunnable(String name, String key, String tags, String tickets, String[] filters) {
-		return isRunnable(new FilterTargetData(tags, tickets, name, key), filters);
+	public static boolean isRunnable(String name, String technicalName, String key, String tags, String tickets, String[] filters) {
+		return isRunnable(new FilterTargetData(tags, tickets, technicalName, name, key), filters);
 	}
 	
 	/**

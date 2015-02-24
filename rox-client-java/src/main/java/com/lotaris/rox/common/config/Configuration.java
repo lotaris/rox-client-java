@@ -256,7 +256,7 @@ public class Configuration {
 	public String getProjectApiId() {
 
 		final ServerConfiguration server = getInternalServerConfiguration();
-		if (server.getProjectApiId() != null) {
+		if (server != null && server.getProjectApiId() != null) {
 			return server.getProjectApiId();
 		}
 

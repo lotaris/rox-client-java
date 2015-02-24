@@ -13,10 +13,11 @@ import java.util.List;
  * @author Laurent Prevost, laurent.prevost@lotaris.com
  */
 public class FilterTargetData {
-	private String tags;
-	private String tickets;
-	private String name;
-	private String key;
+	private final String tags;
+	private final String tickets;
+	private final String name;
+	private final String technicalName;
+	private final String key;
 
 	public String getKey() {
 		return key;
@@ -33,6 +34,7 @@ public class FilterTargetData {
 		this.tags = mergeTags(mAnnotation, cAnnotation);
 		this.tickets = mergeTickets(mAnnotation, cAnnotation);
 		this.name = testName(m, mAnnotation);
+		this.technicalName = m.getDeclaringClass() + "." + m.getName();
 		this.key = mAnnotation != null ? mAnnotation.key() : "";
 	}
 
@@ -41,13 +43,15 @@ public class FilterTargetData {
 	 * 
 	 * @param tags Tags
 	 * @param tickets Tickets
+	 * @param technicalName Technical name
 	 * @param name Name
 	 * @param key Key
 	 */
-	public FilterTargetData(String tags, String tickets, String name, String key) {
+	public FilterTargetData(String tags, String tickets, String technicalName, String name, String key) {
 		this.tags = tags;
 		this.tickets = tickets;
 		this.name = name;
+		this.technicalName = technicalName;
 		this.key = key;
 	}
 	
@@ -70,7 +74,12 @@ public class FilterTargetData {
 	 * @return True if match, false otherwise
 	 */
 	public boolean keyMatch(String lookupKey) {
-		return key.contains(lookupKey);
+		if (key.isEmpty()) {
+			return technicalName.contains(lookupKey);
+		}
+		else {
+			return key.contains(lookupKey);
+		}
 	}
 
 	/**
