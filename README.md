@@ -1,3 +1,7 @@
+### :warning: Unmaintained.
+
+---
+
 # rox-client-java
 
 > Base Java client for [ROX Center](https://github.com/lotaris/rox-center) for Java based clients.
